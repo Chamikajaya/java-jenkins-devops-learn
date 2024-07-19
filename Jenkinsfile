@@ -9,7 +9,13 @@ pipeline {
     }
 
     stages{
-        
+
+        stage('Initialize') {
+            steps {
+                echo 'Initializing the project..'
+                echo "The branch name is: ${BRANCH_NAME}"
+            }
+        }
         stage('Build') {
             steps {
                 echo "Building the project with version: ${BUILD_VERSION}"  // ! need to use double quotes to use the variable
