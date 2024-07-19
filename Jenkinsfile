@@ -30,6 +30,7 @@ pipeline {
                 }
             }
             steps {
+                echo "This pipeline runs on the branch: ${BRANCH_NAME}"
                 echo 'Deploying the project..'
                 withCredentials(
                     [
