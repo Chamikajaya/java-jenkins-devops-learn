@@ -5,7 +5,7 @@ pipeline {
     // environment variables define here will be available to all stages - so it is better to define the variables which are required in many stages of the pipeline
     environment {
         BUILD_VERSION = '1.0.0'
-        BRANCH_NAME = "${env.BRANCH_NAME}" // get the branch name from the default list of  environment variables
+        BRANCH_NAME = "${env.GIT_BRANCH}" // get the branch name from the default list of  environment variables
     }
 
     stages{
