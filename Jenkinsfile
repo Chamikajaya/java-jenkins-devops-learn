@@ -1,4 +1,4 @@
-def gv  // * global variable
+def gv  // * global variable that will be used to store the script file
 
 pipeline {
 
@@ -41,7 +41,15 @@ pipeline {
             }
             steps {
                 script {
-                    gv.deployProject(BRANCH_NAME)
+
+                    //  prompts the user to select a deployment environment &  user's choice is stored in env.DEPLOY_ENV.
+                    // env.DEPLOY_ENV: This syntax explicitly adds the variable to the Jenkins environment variables. It will be available globally throughout the pipeline and in any subsequent steps or stages.  -->
+                    env.DEPLOY_ENV = input message: "Select the environment to deploy", 
+                                    ok: 'Deploy',
+                                    parameters: [
+                                        choice(name: 'ENV', choices: ['dev', 'stage', 'prod'], description: 'Select environment')
+                                    ]
+                    gv.deployProject(BRANCH_NAME, env.DEPLOY_ENV )
                 }
             }
         }

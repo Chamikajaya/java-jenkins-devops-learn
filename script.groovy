@@ -8,10 +8,11 @@ def runTests() {
    echo 'Running the tests..'
 }
 
-def deployProject(branchName) {
+def deployProject(branchName, deployEnv) {
 
     echo "This pipeline runs on the branch: ${branchName}"
-    echo 'Deploying the project..'
+    echo "Deploying the project to the environment: ${deployEnv}"
+
     withCredentials(
         [
             usernamePassword(
@@ -26,5 +27,5 @@ def deployProject(branchName) {
 }
 
 
-
+ 
 return this
