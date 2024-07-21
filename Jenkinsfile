@@ -29,7 +29,7 @@ pipeline {
         stage('Build') {
             when {
                 expression {
-                    BRANCH_NAME == 'origin/main'
+                    BRANCH_NAME == 'main'
                 }
             }
             steps {
@@ -43,7 +43,7 @@ pipeline {
         stage('Deploy') {
             when {
                 expression {
-                    BRANCH_NAME == 'origin/main'
+                    BRANCH_NAME == 'main'
                 }
             }
             steps {
