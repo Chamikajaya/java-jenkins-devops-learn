@@ -18,11 +18,7 @@ pipeline {
         }
         
         stage('Test') {
-            when {
-                expression {
-                    BRANCH_NAME == 'origin/main'
-                }
-            }
+           
             steps {
                 script {
                     gv.runTests(BRANCH_NAME)
@@ -31,6 +27,11 @@ pipeline {
         }
 
         stage('Build') {
+            when {
+                expression {
+                    BRANCH_NAME == 'origin/main'
+                }
+            }
             steps {
                script {
                    gv.buildArtifact(BUILD_VERSION)
