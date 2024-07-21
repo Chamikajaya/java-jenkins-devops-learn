@@ -18,6 +18,11 @@ pipeline {
         }
 
         stage('Build') {
+             when {
+                expression {
+                    BRANCH_NAME == 'main'
+                }
+            }
             steps {
                script {
                    gv.buildArtifact(BUILD_VERSION)
@@ -36,7 +41,7 @@ pipeline {
         stage('Deploy') {
             when {
                 expression {
-                    BRANCH_NAME == 'origin/main'
+                    BRANCH_NAME == 'main'
                 }
             }
             steps {
