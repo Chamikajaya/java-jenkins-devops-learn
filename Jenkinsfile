@@ -5,11 +5,10 @@ pipeline {
     agent any  
     environment {
         BUILD_VERSION = '1.0.0'
-        BRANCH_NAME = "${env.GIT_BRANCH}" // get the branch name from the default list of  environment variables
+        BRANCH_NAME = "${env.GIT_BRANCH}" // get the branch name from the default list of environment variables
     }
 
-    stages{
-
+    stages {
         stage('Initialize') {
             steps {
                 script {
@@ -17,25 +16,24 @@ pipeline {
                 }
             }
         }
+
         stage('Build') {
             steps {
-
-               script{
-                gv.buildArtifact(BUILD_VERSION)
+               script {
+                   gv.buildArtifact(BUILD_VERSION)
                }
-
             }
         }
 
         stage('Test') {
             steps {
-                script{
+                script {
                     gv.runTests()
                 }
             }
         }
 
-         stage('Deploy') {
+        stage('Deploy') {
             when {
                 expression {
                     BRANCH_NAME == 'origin/main'
@@ -49,17 +47,12 @@ pipeline {
         }
     }
 
-  }
-
-  post {
-    success {
-        echo 'Pipeline is successful'
+    post {
+        success {
+            echo 'Pipeline is successful'
+        }
+        failure {
+            echo 'Pipeline failed'
+        }
     }
-    failure {
-        echo 'Pipeline failed'
-    }
-    
-  }
-
-
-
+}
