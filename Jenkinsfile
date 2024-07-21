@@ -16,6 +16,19 @@ pipeline {
                 }
             }
         }
+        
+        stage('Test') {
+            when {
+                expression {
+                    BRANCH_NAME == 'origin/main'
+                }
+            }
+            steps {
+                script {
+                    gv.runTests(BRANCH_NAME)
+                }
+            }
+        }
 
         stage('Build') {
             steps {
@@ -25,14 +38,7 @@ pipeline {
             }
         }
 
-        stage('Test') {
-            steps {
-                script {
-                    gv.runTests()
-                }
-            }
-        }
-
+        
         stage('Deploy') {
             when {
                 expression {
