@@ -16,6 +16,15 @@ pipeline {
                 }
             }
         }
+        
+        stage('Test') {
+           
+            steps {
+                script {
+                    gv.runTests(BRANCH_NAME)
+                }
+            }
+        }
 
         stage('Build') {
              when {
@@ -30,14 +39,7 @@ pipeline {
             }
         }
 
-        stage('Test') {
-            steps {
-                script {
-                    gv.runTests()
-                }
-            }
-        }
-
+        
         stage('Deploy') {
             when {
                 expression {

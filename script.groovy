@@ -4,9 +4,9 @@ def buildArtifact(buildVersion) {
    echo "Building the project version - ${buildVersion}"
 }
 
-def runTests() {
-   echo 'Running the tests..'
-}
+def runTests(branchName) {
+   echo 'Running the tests for ${branchName}'
+   }
 
 def deployProject(branchName, deployEnv) {
 
